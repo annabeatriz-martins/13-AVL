@@ -155,8 +155,18 @@ NO* girarDireita(NO* y) {
    // Passo 4: Recalcule as alturas dos nós afetados.  
    // Passo 5: Retorne o novo nó raiz ('x').  
 
+    NO* x = y->esq;
+
+    y->esq = x->dir;
+    x->dir = y;
+
+    raiz = x;
+
+    y->altura = maior(alturaNo(y->esq), alturaNo(y->dir)) + 1;
+    x->altura = maior(alturaNo(x->esq), alturaNo(x->dir)) + 1;
+
 	// provisoriamente retorna o ponteiro passado como parâmetro
-	return y; 
+	return x; 
 }  
 
 NO* girarEsquerda(NO* x) {  
@@ -174,9 +184,18 @@ NO* girarEsquerda(NO* x) {
    // Passo 4: Recalcule as alturas dos nós afetados.  
    // Passo 5: Retorne o novo nó raiz ('y').  
 
+    NO* y = x->dir;
+    
+    x->dir = y->esq;
+    y->esq = x;
+    
+    raiz = y;
+    
+    y->altura = maior(alturaNo(y->esq), alturaNo(y->dir)) + 1;
+    x->altura = maior(alturaNo(x->esq), alturaNo(x->dir)) + 1;
 
     // provisoriamente retorna o ponteiro passado como parâmetro
-    return x; 
+    return y; 
 }
 
 NO* insereArvore(NO* no, int valor) {
